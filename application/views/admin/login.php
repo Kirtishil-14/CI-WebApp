@@ -25,28 +25,34 @@
         <div class="login-logo">
             CI Web App
         </div>
+        <?php
+        if (!empty($this->session->flashdata('errors'))) {
+            echo '<div class="alert alert-danger mb-3">' . $this->session->flashdata('errors') . '</div>';
+        }
+        ?>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
-                <form action="<?php echo base_url(); ?>public/admin//index3.html" method="post">
+                <form action="<?php echo base_url() . 'admin/login/authenticate' ?>" name="loginForm" id="loginForm" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" placeholder="UserName" name="username" id="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
+                    <?php echo form_error('username'); ?>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
+                    <?php echo form_error('password'); ?>
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
