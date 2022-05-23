@@ -14,4 +14,17 @@ class Common_model extends CI_Model
         // echo $this->db->last_query();
         return $states;
     }
+
+    public function getCitiesOfState($state)
+    {
+        $this->db->where('state_id', $state);
+        $cities = $this->db->get('cities')->result_array();
+        // echo $this->db->last_query();
+        return $cities;
+    }
+
+    public function add($formData)
+    {
+        $this->db->insert('clients', $formData);
+    }
 }
