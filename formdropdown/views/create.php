@@ -11,10 +11,12 @@
     <body>
         <form action="" method="post" id="createForm" name="createForm">
             <div>
-                <input type="text" name="name" id="name" value="">
                 <label for="">Name</label>
-                <input type="text" name="email" id="email" value="">
+                <input type="text" name="name" id="name" value="">
+                <br>
                 <label for="">Email</label>
+                <input type="text" name="email" id="email" value="">
+                <br>
                 <label for="">Country</label>
                 <select name="country" id="country">
                     <option value="">Select Country</option>
@@ -118,8 +120,8 @@
             else {
                 var city = document.getElementById('cityBox');
                 const str = `<select name="city" id="city">
-                                            <option value="">Select City</option>
-                                        </select>`
+                                        <option value="">Select City</option>
+                                    </select>`
                 city.innerHTML = str;
             }
         }
@@ -139,18 +141,21 @@
             city: document.getElementById("city").value,
         };
 
-        fetch('<?php echo base_url('home/saveUsers'); ?>', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(param)
-        }).then(response => response.json()).then(data => {
-            console.log(data);
-            window.location.href = '<?php echo base_url('home/index') ?>';
-        }).catch((error) => {
-            console.error(error);
-        })
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '<?php echo base_url('home/saveUsers'); ?>');
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = (this.responseText);
+                var res_arry = JSON.parse(res);
+                console.log(res_arry);
+                if (res_arry['status'] == '1') {
+                    window.location.href = '<?php echo base_url('home/index') ?>';
+                }
+            }
+        };
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify(param));
+
 
     });
     </script>

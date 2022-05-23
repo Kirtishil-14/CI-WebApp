@@ -116,9 +116,9 @@ $system_path = 'system';
 
 // $application_folder = 'basic-crud';
 
-// $application_folder = 'formdropdown';
+$application_folder = 'formdropdown';
 
-$application_folder = 'ajax-crud';
+// $application_folder = 'ajax-crud';
 
 
 /*

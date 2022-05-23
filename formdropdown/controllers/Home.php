@@ -53,37 +53,24 @@ class Home extends CI_Controller
         $this->load->library('form_validation');
 
         $post = file_get_contents('php://input');
-        // $post = json_encode($post);
-        $post = json_encode($post);
-        print_r($post);
+        $post = json_decode($post);
+
         $response = [];
 
-        /*$this->form_validation->set_rules('name', 'Name', 'required');
-         $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('country', 'Country', 'required');
-        $this->form_validation->set_rules('state', 'State', 'required');
-        $this->form_validation->set_rules('city', 'City', 'required'); */
+        if ($post->name != "") {
+            $formData = [
+                'name' => $post->name,
+                'email' => $post->email,
+                'country' => $post->country,
+                'state' => $post->state,
+                'city' => $post->city,
+            ];
 
-        if (true) {
-            echo json_encode($post['name']);
-            $formData = [];
-            $formData['name'] = $this->input->post('name');
-            $formData['email'] = $this->input->post('email');
-            $formData['country'] = $this->input->post('country');
-            $formData['state'] = $this->input->post('state');
-            $formData['city'] = $this->input->post('city');
-
-            print_r($formData);
-            exit();
             $this->Common_model->add($formData);
             $response['status'] = 1;
             $this->session->set_flashdata('success', 'Client successfully added');
         } else {
-            $response['name'] = form_error('name');
-            $response['email'] = form_error('email');
-            $response['country'] = form_error('country');
-            $response['state'] = form_error('state');
-            $response['city'] = form_error('city');
+            $response['msg'] = 'Please fill all the fields';
             $response['status'] = 0; #error
         }
         echo json_encode($response);
