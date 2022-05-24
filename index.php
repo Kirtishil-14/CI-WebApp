@@ -112,11 +112,11 @@ $system_path = 'system';
  * NO TRAILING SLASH!
  */
 
-$application_folder = 'application';
+// $application_folder = 'application';
 
 // $application_folder = 'basic-crud';
 
-// $application_folder = 'formdropdown';
+$application_folder = 'formdropdown';
 
 // $application_folder = 'ajax-crud';
 
